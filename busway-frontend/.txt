@@ -1,0 +1,17 @@
+busway-projeto/
+├── busway-backend/           # Projeto Spring Boot (Gerado no Spring Initializr)
+│   ├── src/main/java/...     # Controllers, Models, Repositories, Services
+│   ├── src/main/resources/   # application.properties (config do BD)
+│   └── pom.xml
+│
+├── busway-frontend/          # Arquivos da Interface Web
+│   ├── index.html            # Estrutura da tela de vendas
+│   ├── css/
+│   │   └── style.css         # Estilização separada
+│   ├── js/
+│   │   └── app.js            # Lógica de integração com a API
+│   └── assets/               # Imagens, ícones (ex: logo.png)
+│
+└── busway-database/          # Scripts e Modelagem
+    ├── buswayv2.sql          # Dump/DDL do PostgreSQL
+    └── diagramas/            # PDF do DER e modelagens UML

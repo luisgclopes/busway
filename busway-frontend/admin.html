@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BusWay - Administração</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">Bus<span>Way</span> - Painel Administrativo</div>
+  </header>
+
+  <main class="admin-layout">
+
+    <section class="panel">
+      <h2>Cadastrar Ônibus</h2>
+
+      <div class="field">
+        <label for="inputPlaca">Placa</label>
+        <input type="text" id="inputPlaca" placeholder="ABC-1234" maxlength="10" />
+      </div>
+
+      <div class="field">
+        <label for="inputCapacidade">Capacidade</label>
+        <input type="number" id="inputCapacidade" placeholder="40" min="1" />
+      </div>
+
+      <button class="btn btn-primary" id="btnSalvarOnibus">Salvar Ônibus</button>
+
+      <div class="list-section">
+        <h3>Ônibus cadastrados</h3>
+        <div id="listaOnibus" class="list-container">
+          <p class="empty-state">Carregando ônibus...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Cadastrar Rota</h2>
+
+      <div class="field">
+        <label for="inputOrigem">Origem</label>
+        <input type="text" id="inputOrigem" placeholder="Ex.: Seropédica" />
+      </div>
+
+      <div class="field">
+        <label for="inputDestino">Destino</label>
+        <input type="text" id="inputDestino" placeholder="Ex.: Rio de Janeiro" />
+      </div>
+
+      <button class="btn btn-primary" id="btnSalvarRota">Salvar Rota</button>
+
+      <div class="list-section">
+        <h3>Rotas cadastradas</h3>
+        <div id="listaRotas" class="list-container">
+          <p class="empty-state">Carregando rotas...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Cadastrar Horário</h2>
+
+      <div class="field">
+        <label for="selectRota">Rota</label>
+        <select id="selectRota">
+          <option value="">Selecione uma rota</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="selectOnibus">Ônibus</label>
+        <select id="selectOnibus">
+          <option value="">Selecione um ônibus</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="inputDataViagem">Data</label>
+        <input type="date" id="inputDataViagem" />
+      </div>
+
+      <div class="field">
+        <label for="inputHoraViagem">Hora</label>
+        <input type="time" id="inputHoraViagem" />
+      </div>
+
+      <button class="btn btn-primary" id="btnSalvarViagem">Salvar Horário</button>
+
+      <div class="list-section">
+        <h3>Horários cadastrados</h3>
+        <div id="listaViagens" class="list-container">
+          <p class="empty-state">Carregando horários...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="toast" class="toast">Notificação</div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
