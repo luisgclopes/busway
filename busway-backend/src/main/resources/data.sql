@@ -1,5 +1,9 @@
--- 1. Inserir Funcionário (O frontend envia id_funcionario: 1)
-INSERT INTO funcionario (nome, cargo) VALUES ('Atendente Teste', 'FUNCIONARIO');
+-- 1. Inserir Funcionários (O frontend envia id_funcionario: 1 no protótipo)
+-- Usuário Atendente (id_funcionario = 1)
+INSERT INTO funcionario (nome, cargo, login, senha) VALUES ('Atendente Guichê', 'FUNCIONARIO', 'atendente', '1234');
+
+-- Usuário Administrador (id_funcionario = 2)
+INSERT INTO funcionario (nome, cargo, login, senha) VALUES ('Administrador Sistema', 'ADMIN', 'admin', 'admin123');
 
 -- 2. Inserir Rotas
 INSERT INTO rota (origem, destino) VALUES ('Seropédica', 'Rio de Janeiro');

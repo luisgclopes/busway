@@ -28,7 +28,7 @@ const DOM = {
 
 async function carregarRotasDisponiveis() {
   try {
-    const res = await fetch(`${URL_BASE}/rotas`);
+    const res = await fetch(`${URL_BASE}/rotas`, { credentials: 'include' });
     if (!res.ok) throw new Error('Falha ao conectar com o servidor');
 
     const rotas = await res.json();
@@ -52,13 +52,13 @@ async function carregarRotasDisponiveis() {
 }
 
 async function buscarViagens(origem, destino, data) {
-  const res = await fetch(`${URL_BASE}/viagens?origem=${origem}&destino=${destino}&data=${data}`);
+  const res = await fetch(`${URL_BASE}/viagens?origem=${origem}&destino=${destino}&data=${data}`, { credentials: 'include' });
   if (!res.ok) throw new Error('Erro ao buscar viagens');
   return await res.json();
 }
 
 async function buscarPoltronasOcupadas(idViagem) {
-  const res = await fetch(`${URL_BASE}/viagens/${idViagem}/poltronas-ocupadas`);
+  const res = await fetch(`${URL_BASE}/viagens/${idViagem}/poltronas-ocupadas`, { credentials: 'include' });
   if (!res.ok) throw new Error('Erro ao consultar ocupação');
   return await res.json();
 }
@@ -66,6 +66,7 @@ async function buscarPoltronasOcupadas(idViagem) {
 async function emitirPassagemNoServidor(payload) {
   const res = await fetch(`${URL_BASE}/vendas`, {
     method: 'POST',
+    credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
@@ -140,8 +141,13 @@ function preencherPassagem() {
     ? `R$ ${estado.viagemSelecionada.valor.toFixed(2).replace('.', ',')}` : 'R$ 0,00';
 }
 
-// Inicialização: Carrega as rotas ao abrir o sistema
-window.addEventListener('DOMContentLoaded', carregarRotasDisponiveis);
+// Inicialização: Protege a página, desenha a Topbar e carrega as rotas
+window.addEventListener('DOMContentLoaded', async () => {
+  const usuario = await protegerPagina('index');
+  if (usuario) {
+    carregarRotasDisponiveis();
+  }
+});
 
 // AÇÃO: Buscar Viagens
 DOM.btnBuscarViagens.addEventListener('click', async () => {
@@ -276,7 +282,7 @@ DOM.btnFinalizarVenda.addEventListener('click', async () => {
     numero_poltrona: estado.poltronaSelecionada,
     passageiro_cpf: estado.passageiro.cpf,
     passageiro_nome: estado.passageiro.nome,
-    id_funcionario: 1, // Fixado temporariamente para o protótipo
+    id_funcionario: window.usuarioLogado.idFuncionario, // ID dinâmico real do banco!
     valor: estado.viagemSelecionada.valor
   };
 

@@ -33,6 +33,31 @@ body {
   border-bottom: 4px solid var(--accent);
 }
 
+.topbar { justify-content: space-between; gap: 16px; }
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: 14px;
+}
+.topbar-user a,
+.topbar-user button {
+  color: #fff;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 600;
+}
+.topbar-user button:hover,
+.topbar-user a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .brand {
   font-size: 20px;
   font-weight: 800;

@@ -29,6 +29,7 @@ function mostrarToast(msg, tipo = 'erro') {
 
 async function req(url, options = {}) {
   const res = await fetch(url, {
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       ...(options.headers || {})
@@ -203,4 +204,10 @@ DOM.btnSalvarViagem.addEventListener('click', async () => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', carregarTudo);
+// Inicialização: Protege a aba de Admin, desenha a Topbar e carrega os dados
+window.addEventListener('DOMContentLoaded', async () => {
+  const usuario = await protegerPagina('admin');
+  if (usuario) {
+    carregarTudo();
+  }
+});
