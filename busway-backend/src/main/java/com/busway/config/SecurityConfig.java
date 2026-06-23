@@ -25,20 +25,19 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Libera o preflight do CORS
                 .requestMatchers("/api/me", "/api/logout").authenticated()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/vendas").hasAnyRole("ADMIN", "ATENDENTE", "FUNCIONARIO")
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest().permitAll()
             )
-            // Adiciona o nosso filtro de sessão ANTES do filtro padrão do Spring
             .addFilterBefore(sessionAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .httpBasic(httpBasic -> httpBasic.disable())
             .formLogin(form -> form.disable())
             .logout(logout -> logout.disable());
-            
+
         return http.build();
     }
 }
